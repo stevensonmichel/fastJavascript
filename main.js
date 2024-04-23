@@ -35,6 +35,7 @@ const weatherCondition = "sunny";
 const userLocation = "Mumbai";
 let temperature = 35.78;
 
+
 let celsiusText = `The weather is ${weatherCondition} in ${userLocation} and it's ${temperature.toFixed(1)} fahrenheit outside`
 let fahrenheitText = `The weather is ${weatherCondition} in ${userLocation} and it's ${celsiusToFahr(temperature).toFixed(1)} fahrenheit outside`
 
@@ -52,3 +53,10 @@ document.querySelector(".weather-group").addEventListener("click", function(e) {
     }
     
 });
+
+
+// new Date().getHours();
+
+// new Date().getMinutes();
+
+// new Date().getSeconds();
