@@ -169,27 +169,12 @@ function galleryHandler() {
 
 
 // Products Section
-/* <div class="product-item">
-    <img src="./assets/products/img1.png" alt="Space Odissey">
-    <div class="product-details">
-        <h3 class="product-title">Space Odissey</h3>
-        <p class="product-author">Marie Anne</p>
-        <p class="price-title">Price</p>
-        <p class="product-price">$ 35.00</p>
-    </div>
-</div> */
 
 
-function productsHandler() {
+function populateProducts(productList) {
     let productSection = document.querySelector(".products-area");
-    let freeProducts = products.filter(function(item) {
-        return !item.price || item.price <= 0;
-    });
-    let paidProducts = products.filter(function(item) {
-        return item.price > 0;
-    });
-
-    products.forEach(function(product, index) {
+    productSection.textContent = "";
+    productList.forEach(function(product, index) {
         // Create the html for the individual image
         let productElement = document.createElement("div");
         productElement.classList.add("product-item");
@@ -232,12 +217,58 @@ function productsHandler() {
 
         productSection.append(productElement)
     });
+}
+
+
+
+/* <div class="product-item">
+    <img src="./assets/products/img1.png" alt="Space Odissey">
+    <div class="product-details">
+        <h3 class="product-title">Space Odissey</h3>
+        <p class="product-author">Marie Anne</p>
+        <p class="price-title">Price</p>
+        <p class="product-price">$ 35.00</p>
+    </div>
+</div> */
+
+
+function productsHandler() {
+    
+    let freeProducts = products.filter(function(item) {
+        return !item.price || item.price <= 0;
+    });
+    let paidProducts = products.filter(function(item) {
+        return item.price > 0;
+    });
+
+    populateProducts(products);
 
     
     document.querySelector(".products-filter label[for=all] span.product-amount").textContent = products.length; 
     document.querySelector(".products-filter label[for=paid] span.product-amount").textContent = paidProducts.length;
     document.querySelector(".products-filter label[for=free] span.product-amount").textContent = freeProducts.length;
+
+    let productsFilter = document.querySelector(".products-filter");
+    productsFilter.addEventListener("click", function(e) {
+        if (e.target.id === "all") {
+            populateProducts(products);
+        } else if (e.target.id === "paid") {
+            populateProducts(paidProducts);
+        } else if (e.target.id === "free") {
+            populateProducts(freeProducts);
+        }
+    })
 }
+
+
+function footerHandler() {
+    let currentYear = new Date().getFullYear();
+    document.querySelector("footer").textContent = `© ${currentYear} - All rights reserved`
+}
+
+navigator.geolocation.getCurrentPosition(function(position) {
+    console.log(position);
+})
 
 // let numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 // let greaterThan4 = numbers.filter(function(item) {
@@ -250,3 +281,4 @@ greetingHandler();
 clockHandler();
 galleryHandler();
 productsHandler();
+footerHandler();
